@@ -43,8 +43,13 @@ public class ControllerMainWindow {
 
         //textAreaInfo.setText(""); // очистить
 
-        ConnectionDataBase.disconnect();
-        textAreaInfo.appendText("Соединение с сервером баз данных разорвано\n");
+        if (ConnectionDataBase.disconnect()){
+            textAreaInfo.appendText("Соединение с сервером баз данных разорвано\n");
+        }
+        else {
+            textAreaInfo.appendText("Ошибка.\n Соединение с сервером баз данных не было разорвано\n");
+        }
+
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

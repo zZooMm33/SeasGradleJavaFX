@@ -41,4 +41,35 @@ public class PropReader
 
         return null;
     }
+
+    /**
+     * Сохранит новое значение по ключу в config.properties
+     *
+     * @param key Ключ в config.properties
+     * @param val Новое значение
+     * @return Вернет значение по ключу
+     */
+    public static boolean setVal(String key, String val)
+    {
+
+        Properties prop = new Properties();
+
+        InputStream inputStream = PropReader.class.getClassLoader().getResourceAsStream(PROP_FILE_NAME);
+
+        if (inputStream != null)
+        {
+            try
+            {
+                prop.load(inputStream);
+                prop.setProperty(key, val);
+
+            } catch (IOException e)
+            {
+                e.printStackTrace();
+                return false;
+            }
+        }
+
+        return true;
+    }
 }

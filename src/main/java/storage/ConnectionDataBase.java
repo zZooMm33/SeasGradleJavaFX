@@ -59,16 +59,18 @@ public class ConnectionDataBase {
 
     }
 
-    public static void disconnect(){
+    public static boolean disconnect(){
 
-        if (connection == null) return;
+        if (connection == null) return true;
 
         try {
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
+            return false;
         }
 
         connection = null;
+        return true;
     }
 }
