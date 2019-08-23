@@ -31,7 +31,7 @@ public class ConnectionDataBase {
 
                     Class.forName("org.h2.Driver");
 
-                    if (pass.equals("null"))
+                    if (pass.equals("null") || pass.equals(""))
                     {
                         pass = null;
                     }

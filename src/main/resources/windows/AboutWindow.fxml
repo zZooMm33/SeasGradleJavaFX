@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="268.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControllerAboutWindow">
+   <children>
+      <Pane layoutX="-1.0" layoutY="-1.0" prefHeight="210.0" prefWidth="301.0">
+         <children>
+            <Label layoutX="8.0" layoutY="11.0" text="About">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label alignment="TOP_LEFT" layoutX="8.0" layoutY="44.0" prefHeight="164.0" prefWidth="288.0" text="Приложение было создано... бла бла бла.&#10;Все настройки находятся в menu/settings,&#10;так же настройки можно изменить &#10;в ручную в файле config.properties.&#10;&#10;P.S. тип подключения к БД .txt не работет." />
+         </children>
+      </Pane>
+      <Button fx:id="buttonOk" layoutX="257.0" layoutY="235.0" mnemonicParsing="false" onAction="#buttonOkOnClick" text="OK" />
+   </children>
+</AnchorPane>

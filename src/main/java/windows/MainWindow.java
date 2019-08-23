@@ -20,7 +20,7 @@ public class MainWindow extends Application {
 
         try {
             root = FXMLLoader.load(getClass().getResource("MainWindow.fxml"));
-            primaryStage.setTitle("Hello World");
+            primaryStage.setTitle("Seas");
 
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
