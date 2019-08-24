@@ -2,7 +2,7 @@
  * Sample Skeleton for 'AboutWindow.fxml' Controller Class
  */
 
-package controllers;
+package controllers.menu;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

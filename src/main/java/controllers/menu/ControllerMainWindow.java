@@ -3,7 +3,7 @@
  * Sample Skeleton for 'mainWindow.fxml' Controller Class
  */
 
-package controllers;
+package controllers.menu;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -16,10 +16,34 @@ import javafx.scene.control.TextArea;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import storage.ConnectionDataBase;
+import utils.PropReader;
+import utils.StaticFields;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class ControllerMainWindow {
+
+    /**
+     * Ссылка на дочернее окно настроек
+     */
+    private ControllerSettingsWindow childrenSettingsWindow;
+
+    public ControllerSettingsWindow getChildrenSettingsWindow() {
+        return childrenSettingsWindow;
+    }
+
+    public void setChildrenSettingsWindow(ControllerSettingsWindow childrenSettingsWindow) {
+        this.childrenSettingsWindow = childrenSettingsWindow;
+    }
+
+    public TextArea getTextAreaInfo() {
+        return textAreaInfo;
+    }
+
+    public void setTextAreaInfo(TextArea textAreaInfo) {
+        this.textAreaInfo = textAreaInfo;
+    }
 
     @FXML // fx:id="textAreaInfo"
     private TextArea textAreaInfo; // Value injected by FXMLLoader
@@ -70,9 +94,9 @@ public class ControllerMainWindow {
     void aboutOnClick(ActionEvent event) {
         try {
             Stage windowAbout = new Stage();
-            Parent rootAbout = FXMLLoader.load(getClass().getResource("../windows/AboutWindow.fxml"));
+            Parent rootAbout = FXMLLoader.load(getClass().getResource("/windows/menu/AboutWindow.fxml"));
 
-            windowAbout.setTitle("About");
+            windowAbout.setTitle(StaticFields.getNameAboutWindow());
 
             Scene sceneAbout = new Scene(rootAbout);
             windowAbout.setScene(sceneAbout);
@@ -92,7 +116,24 @@ public class ControllerMainWindow {
 
     @FXML
     void settingsOnClick(ActionEvent event) {
+        try {
+            Stage windowSettings = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/windows/menu/SettingsWindow.fxml"));
+            Parent rootAbout = loader.load();
+            windowSettings.setTitle(StaticFields.getNameSettingsWindow());
+            Scene sceneAbout = new Scene(rootAbout);
+            windowSettings.setScene(sceneAbout);
+            windowSettings.initModality(Modality.WINDOW_MODAL); // Делаем окно модельным (не работает)
+            windowSettings.show();
 
+            setChildrenSettingsWindow(loader.getController());
+            getChildrenSettingsWindow().setParent(this);
+
+        } catch (IOException e) {
+            textAreaInfo.appendText("Ошибка при открытии окна Properties\n");
+            e.printStackTrace();
+        }
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

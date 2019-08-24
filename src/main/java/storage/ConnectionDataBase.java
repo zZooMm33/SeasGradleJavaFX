@@ -1,5 +1,7 @@
 package storage;
 
+import utils.PropReader;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
