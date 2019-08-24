@@ -11,13 +11,11 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import utils.PropReader;
+
+import javax.swing.*;
 
 public class ControllerSettingsWindow {
 
@@ -89,7 +87,8 @@ public class ControllerSettingsWindow {
                 || !PropReader.setVal("pass", textFieldPass.getText())
                 || !PropReader.setVal("storageType", comboBoxStorageType.getValue().toString())
                 || !PropReader.setVal("siteParse", textAreaSite.getText())){
-            parent.getTextAreaInfo().appendText("Ошибка при сохранении настроек.\n");
+            //ButtonType.APPLY / Alert.AlertType.NOBE
+            new Alert(Alert.AlertType.ERROR, "Ошибка при сохранении настроек.").show();
         }
 
         Stage stage = (Stage) buttonOk.getScene().getWindow();
