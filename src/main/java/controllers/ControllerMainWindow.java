@@ -3,16 +3,19 @@
  * Sample Skeleton for 'mainWindow.fxml' Controller Class
  */
 
-package controllers.menu;
+package controllers;
 
+import controllers.menu.ControllerSettingsWindow;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import storage.ConnectionDataBase;
@@ -20,7 +23,6 @@ import utils.PropReader;
 import utils.StaticFields;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 public class ControllerMainWindow {
 
@@ -45,6 +47,9 @@ public class ControllerMainWindow {
         this.textAreaInfo = textAreaInfo;
     }
 
+    @FXML // fx:id="anchorPane"
+    private AnchorPane anchorPane; // Value injected by FXMLLoader
+
     @FXML // fx:id="textAreaInfo"
     private TextArea textAreaInfo; // Value injected by FXMLLoader
 
@@ -63,15 +68,23 @@ public class ControllerMainWindow {
     @FXML // fx:id="exit"
     private MenuItem exit; // Value injected by FXMLLoader
 
+    @FXML // fx:id="createDB"
+    private MenuItem createDB; // Value injected by FXMLLoader
+
+    @FXML // fx:id="createTables"
+    private MenuItem createTables; // Value injected by FXMLLoader
+
+    @FXML // fx:id="testConnectionDataBase"
+    private MenuItem testConnectionDataBase; // Value injected by FXMLLoader
+
     @FXML
     void buttonConnectionOnClick(ActionEvent event) {
 
         //textAreaInfo.setText(""); // очистить
 
-        if (ConnectionDataBase.getConnection() != null){
+        if (ConnectionDataBase.getConnection() != null) {
             textAreaInfo.appendText("Успешно подключено к БД\n");
-        }
-        else{
+        } else {
             textAreaInfo.appendText("Ошибка при подключении к БД\n");
         }
     }
@@ -81,10 +94,9 @@ public class ControllerMainWindow {
 
         //textAreaInfo.setText(""); // очистить
 
-        if (ConnectionDataBase.disconnect()){
+        if (ConnectionDataBase.disconnect()) {
             textAreaInfo.appendText("Соединение с сервером баз данных разорвано\n");
-        }
-        else {
+        } else {
             textAreaInfo.appendText("Ошибка.\n Соединение с сервером баз данных не было разорвано\n");
         }
 
@@ -100,7 +112,8 @@ public class ControllerMainWindow {
 
             Scene sceneAbout = new Scene(rootAbout);
             windowAbout.setScene(sceneAbout);
-            windowAbout.initModality(Modality.WINDOW_MODAL); // Делаем окно модельным (не работает)
+            windowAbout.initModality(Modality.WINDOW_MODAL); // Делаем окно модельным
+            windowAbout.initOwner((Stage) anchorPane.getScene().getWindow());
             windowAbout.show();
 
         } catch (IOException e) {
@@ -124,7 +137,9 @@ public class ControllerMainWindow {
             windowSettings.setTitle(StaticFields.getNameSettingsWindow());
             Scene sceneAbout = new Scene(rootAbout);
             windowSettings.setScene(sceneAbout);
-            windowSettings.initModality(Modality.WINDOW_MODAL); // Делаем окно модельным (не работает)
+            windowSettings.initModality(Modality.WINDOW_MODAL); // Делаем окно модельным
+            windowSettings.initOwner((Stage) anchorPane.getScene().getWindow());
+
             windowSettings.show();
 
             setChildrenSettingsWindow(loader.getController());
@@ -136,7 +151,52 @@ public class ControllerMainWindow {
         }
     }
 
-    @FXML // This method is called by the FXMLLoader when initialization is complete
+    @FXML
+    void createDBOnClick(ActionEvent event) {
+        try {
+            Stage windowCreateDataBase = new Stage();
+            Parent rootAbout = FXMLLoader.load(getClass().getResource("/windows/dataBase/CreateDataBaseWindow.fxml"));
+
+            windowCreateDataBase.setTitle(StaticFields.getNameAboutWindow());
+
+            Scene sceneAbout = new Scene(rootAbout);
+            windowCreateDataBase.setScene(sceneAbout);
+            windowCreateDataBase.initModality(Modality.WINDOW_MODAL); // Делаем окно модельным
+            windowCreateDataBase.initOwner((Stage) anchorPane.getScene().getWindow());
+            windowCreateDataBase.show();
+
+        } catch (IOException e) {
+            textAreaInfo.appendText("Ошибка при открытии окна Create DataBase\n");
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void createTablesOnClick(ActionEvent event) {
+
+    }
+
+    @FXML
+    void testConnectionDataBaseOnClick(ActionEvent event) {
+        if (ConnectionDataBase.getConnection() != null) {
+            new Alert(Alert.AlertType.INFORMATION, "Подключение было успешно проверено.\nОшибок выявлено не было.").show();
+            ConnectionDataBase.disconnect();
+
+
+        } else {
+            boolean cyrillic = PropReader.getVal("host").chars()
+                    .mapToObj(Character.UnicodeBlock::of)
+                    .anyMatch(b -> b.equals(Character.UnicodeBlock.CYRILLIC));
+
+            if (cyrillic)
+                new Alert(Alert.AlertType.ERROR, "Ошибка при подключении к БД. \nВ строке присутствует Кириллица.").show();
+            else
+                new Alert(Alert.AlertType.ERROR, "Ошибка при подключении к БД.").show();
+        }
+    }
+
+    @FXML
+        // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
 
     }

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.menu.ControllerMainWindow">
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ControllerMainWindow">
    <children>
       <Pane layoutX="1.0" layoutY="-1.0" prefHeight="400.0" prefWidth="600.0">
          <children>
@@ -23,6 +23,13 @@
                     <MenuItem fx:id="about" mnemonicParsing="false" onAction="#aboutOnClick" text="About" />
                         <MenuItem fx:id="exit" mnemonicParsing="false" onAction="#exitOnClick" text="Exit" />
                      </items>
+                  </Menu>
+                  <Menu mnemonicParsing="false" text="DataBase">
+                    <items>
+                      <MenuItem fx:id="createDB" mnemonicParsing="false" onAction="#createDBOnClick" text="Create DataBase" />
+                        <MenuItem fx:id="createTables" mnemonicParsing="false" onAction="#createTablesOnClick" text="Create tables in the DataBase" />
+                        <MenuItem fx:id="testConnectionDataBase" mnemonicParsing="false" onAction="#testConnectionDataBaseOnClick" text="Check DataBase connection" />
+                    </items>
                   </Menu>
               </menus>
             </MenuBar>

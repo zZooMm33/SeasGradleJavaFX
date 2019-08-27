@@ -7,15 +7,13 @@ package controllers.menu;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import controllers.ControllerMainWindow;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import utils.PropReader;
-
-import javax.swing.*;
 
 public class ControllerSettingsWindow {
 
@@ -31,12 +29,6 @@ public class ControllerSettingsWindow {
     public void setParent(ControllerMainWindow parent) {
         this.parent = parent;
     }
-
-    @FXML // ResourceBundle that was given to the FXMLLoader
-    private ResourceBundle resources;
-
-    @FXML // URL location of the FXML file that was given to the FXMLLoader
-    private URL location;
 
     @FXML // fx:id="labelHost"
     private Label labelHost; // Value injected by FXMLLoader
