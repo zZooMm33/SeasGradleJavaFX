@@ -174,7 +174,11 @@ public class ControllerMainWindow {
 
     @FXML
     void createTablesOnClick(ActionEvent event) {
-        CreateTables.Create();
+        if (CreateTables.Create()){
+            System.out.println("true");
+        }
+        else
+            System.out.println("false");
     }
 
     @FXML

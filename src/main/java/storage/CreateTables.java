@@ -4,6 +4,9 @@ import utils.PropReader;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class CreateTables {
     public static boolean Create(){
@@ -25,8 +28,18 @@ public class CreateTables {
                     sql += (char)i;
                 }
 
-                System.out.println(sql);
-                return true;
+                Statement statement = null;
+                try {
+                    statement = ConnectionDataBase.getConnection().createStatement();
+                    return statement.execute(sql);
+//                    ResultSet resultSet = statement.executeQuery(sql);
+//                    resultSet.next();
+                    //return true;
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return false;
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
                 return false;
