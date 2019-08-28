@@ -16,7 +16,7 @@ public class CreateDataBase {
             try {
 
                 File dbFile = new File(propFilePath + "/" + name + ".db");
-                InputStream inputStream = CreateDataBase.class.getClassLoader().getResourceAsStream("emptyDataBase/SQLite/empty.db"); ///emptyDataBase/SQLite/
+                InputStream inputStream = CreateDataBase.class.getClassLoader().getResourceAsStream("dataBase/emptyDataBase/SQLite/empty.db"); ///emptyDataBase/SQLite/
 
                 propFilePath.mkdir();
                 dbFile.createNewFile();
@@ -39,8 +39,8 @@ public class CreateDataBase {
             try {
                 File dbFile_1 = new File(propFilePath + "/" + name + ".h2.db");
                 File dbFile_2 = new File(propFilePath + "/" + name + ".trace.db");
-                InputStream inputStream_1 = PropReader.class.getClassLoader().getResourceAsStream("emptyDataBase/H2/empty.h2.db");
-                InputStream inputStream_2 = PropReader.class.getClassLoader().getResourceAsStream("emptyDataBase/H2/empty.trace.db");
+                InputStream inputStream_1 = PropReader.class.getClassLoader().getResourceAsStream("dataBase/emptyDataBase/H2/empty.h2.db");
+                InputStream inputStream_2 = PropReader.class.getClassLoader().getResourceAsStream("dataBase/emptyDataBase/H2/empty.trace.db");
 
                 propFilePath.mkdir();
                 dbFile_1.createNewFile();

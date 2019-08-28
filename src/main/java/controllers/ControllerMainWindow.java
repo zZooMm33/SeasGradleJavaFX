@@ -19,6 +19,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import storage.ConnectionDataBase;
+import storage.CreateTables;
 import utils.PropReader;
 import utils.StaticFields;
 
@@ -173,7 +174,7 @@ public class ControllerMainWindow {
 
     @FXML
     void createTablesOnClick(ActionEvent event) {
-
+        CreateTables.Create();
     }
 
     @FXML
