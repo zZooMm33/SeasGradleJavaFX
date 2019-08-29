@@ -175,10 +175,10 @@ public class ControllerMainWindow {
     @FXML
     void createTablesOnClick(ActionEvent event) {
         if (CreateTables.Create()){
-            System.out.println("true");
+            new Alert(Alert.AlertType.INFORMATION, "Таблицы были успешно созданы.").show();
         }
         else
-            System.out.println("false");
+            new Alert(Alert.AlertType.ERROR, "Ошибка при создании таблиц в БД.").show();
     }
 
     @FXML

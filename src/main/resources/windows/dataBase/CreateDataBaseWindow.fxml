@@ -20,8 +20,8 @@
             </Label>
             <ComboBox fx:id="comboBoxStorageType" layoutX="109.0" layoutY="100.0" prefHeight="27.0" prefWidth="190.0" />
             <Label layoutX="14.0" layoutY="105.0" text="Storage type" />
-            <CheckBox fx:id="checkBoxCreateTables" layoutX="14.0" layoutY="145.0" mnemonicParsing="false" text="Create tables" />
-            <CheckBox fx:id="checkBoxSaveSettings" layoutX="14.0" layoutY="185.0" mnemonicParsing="false" text="Save new parameters in settings" />
+            <CheckBox fx:id="checkBoxCreateTables" layoutX="14.0" layoutY="145.0" mnemonicParsing="false" onAction="#checkBoxCreateTablesOnClick" text="Create tables" />
+            <CheckBox fx:id="checkBoxSaveSettings" layoutX="14.0" layoutY="185.0" mnemonicParsing="false" onAction="#checkBoxSaveSettingsOnClick" text="Save new parameters in settings" />
             <Label layoutX="14.0" layoutY="65.0" text="DataBase name" />
             <TextField fx:id="textFieldDataBaseName" layoutX="121.0" layoutY="60.0" prefHeight="27.0" prefWidth="177.0" />
             <Button fx:id="buttonCreate" layoutX="174.0" layoutY="249.0" mnemonicParsing="false" onAction="#buttonCreateOnClick" text="Create" />

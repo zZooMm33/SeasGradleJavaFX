@@ -64,19 +64,20 @@ public class CreateDataBase {
 
         }
 
-        if (createTable){
-            // вызываем метод создания таблицы
-        }
 
         if(saveSettings){
             PropReader.setVal("storageType", storageType);
-            PropReader.setVal("user", "sa");
-            PropReader.setVal("pass", "null");
+            PropReader.setVal("user", StaticFields.getUserNameDb());
+            PropReader.setVal("pass", StaticFields.getUserPassDb());
 
             if (storageType.equals("databaseSQLite"))
                 PropReader.setVal("host", "jdbc:sqlite:" + System.getProperty("user.home") + "/" + StaticFields.getNameProgram() + "/db/" + name+ "/" + name + ".db");
             else
                 PropReader.setVal("host", "jdbc:h2:" + System.getProperty("user.home") + "/" + StaticFields.getNameProgram() + "/db/" + name+ "/" + name);
+        }
+
+        if (createTable){
+            CreateTables.Create();
         }
 
         return true;

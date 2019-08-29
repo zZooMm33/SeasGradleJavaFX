@@ -28,13 +28,11 @@ public class CreateTables {
                     sql += (char)i;
                 }
 
-                Statement statement = null;
+
                 try {
-                    statement = ConnectionDataBase.getConnection().createStatement();
-                    return statement.execute(sql);
-//                    ResultSet resultSet = statement.executeQuery(sql);
-//                    resultSet.next();
-                    //return true;
+
+                    ConnectionDataBase.getConnection().createStatement().executeUpdate(sql);
+                    return true;
                 } catch (SQLException e) {
                     e.printStackTrace();
                     return false;
@@ -46,7 +44,6 @@ public class CreateTables {
             }
         }
         else return false;
-
 
     }
 }

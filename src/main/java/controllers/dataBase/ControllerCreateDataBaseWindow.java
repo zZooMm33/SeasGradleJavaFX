@@ -74,8 +74,8 @@ public class ControllerCreateDataBaseWindow {
                 new Alert(Alert.AlertType.INFORMATION,
                         "База данных была успешно создана.\n" +
                                 "host: " + host + "\n" +
-                                "user: sa\n" +
-                                "pass: null")
+                                "user: " + StaticFields.getUserNameDb() + "\n" +
+                                "pass: " + StaticFields.getUserPassDb())
                         .show();
             }
             else
@@ -85,6 +85,21 @@ public class ControllerCreateDataBaseWindow {
         }
 
 
+    }
+
+    @FXML
+    void checkBoxSaveSettingsOnClick(ActionEvent event) {
+        // после клика 2 флаг фолс
+        if (checkBoxCreateTables.isSelected() && !checkBoxSaveSettings.isSelected()){
+            checkBoxCreateTables.setSelected(false);
+        }
+    }
+
+    @FXML
+    void checkBoxCreateTablesOnClick(ActionEvent event) {
+        if (checkBoxCreateTables.isSelected() && !checkBoxSaveSettings.isSelected()){
+            checkBoxCreateTables.setSelected(false);
+        }
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete

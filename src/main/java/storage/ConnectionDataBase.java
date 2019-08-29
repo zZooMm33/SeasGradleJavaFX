@@ -39,6 +39,7 @@ public class ConnectionDataBase {
                     }
 
                     connection = DriverManager.getConnection(host, user, pass);
+                    return connection;
                 }
                 else if (PropReader.getVal("storageType").equals("databaseSQLite")){
                     String host = PropReader.getVal("host");
@@ -46,6 +47,7 @@ public class ConnectionDataBase {
                     Class.forName("org.sqlite.JDBC");
 
                     connection = DriverManager.getConnection(host);
+                    return connection;
                 }
                 else{
                     // txt file
