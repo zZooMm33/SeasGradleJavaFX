@@ -37,7 +37,6 @@
                             <MenuItem fx:id="buttonAddSeas" mnemonicParsing="false" onAction="#buttonAddSeasOnClick" text="Add" />
                               <MenuItem fx:id="buttonChangeSeas" mnemonicParsing="false" onAction="#buttonChangeSeasOnClick" text="Сhange" />
                               <MenuItem fx:id="buttonDeleteSeas" mnemonicParsing="false" onAction="#buttonDeleteSeasOnClick" text="Delete" />
-                              <MenuItem mnemonicParsing="false" text="Update" />
                           </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Oceans">
@@ -45,9 +44,9 @@
                               <MenuItem fx:id="buttonAddOceans" mnemonicParsing="false" onAction="#buttonAddOceansOnClick" text="Add" />
                               <MenuItem fx:id="buttonChangeOceans" mnemonicParsing="false" onAction="#buttonChangeOceansOnClick" text="Сhange" />
                               <MenuItem fx:id="buttonDeleteOceans" mnemonicParsing="false" onAction="#buttonDeleteOceansOnClick" text="Delete" />
-                              <MenuItem fx:id="buttonUpdateOceans" mnemonicParsing="false" onAction="#buttonUpdateOceansOnClick" text="Update" />
                            </items>
                         </Menu>
+                        <MenuItem fx:id="buttonUpdateTables" mnemonicParsing="false" onAction="#buttonUpdateTablesOnClick" text="Update" />
                      </items>
                   </Menu>
               </menus>
@@ -60,13 +59,13 @@
                            <children>
                               <Pane layoutX="4.0" layoutY="4.0" prefHeight="332.0" prefWidth="589.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <TableView prefHeight="332.0" prefWidth="589.0">
+                                    <TableView fx:id="tbSeas" prefHeight="332.0" prefWidth="589.0">
                                       <columns>
-                                        <TableColumn prefWidth="44.76609659194946" text="id" />
-                                        <TableColumn prefWidth="124.6773796081543" text="Name" />
-                                          <TableColumn prefWidth="91.50265502929688" text="Square" />
-                                          <TableColumn prefWidth="95.974853515625" text="MaxDepth" />
-                                          <TableColumn prefWidth="127.2418212890625" text="Ocean" />
+                                        <TableColumn fx:id="tcSeasId" prefWidth="44.76609659194946" text="id" />
+                                        <TableColumn fx:id="tcSeasName" prefWidth="124.6773796081543" text="Name" />
+                                          <TableColumn fx:id="tcSeasSquare" prefWidth="91.50265502929688" text="Square" />
+                                          <TableColumn fx:id="tcSeasMaxDepth" prefWidth="95.974853515625" text="MaxDepth" />
+                                          <TableColumn fx:id="tcSeasOcean" prefWidth="127.2418212890625" text="Ocean" />
                                       </columns>
                                     </TableView>
                                  </children>
@@ -81,11 +80,11 @@
                            <children>
                               <Pane layoutX="4.0" layoutY="4.0" prefHeight="332.0" prefWidth="589.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                  <children>
-                                    <TableView prefHeight="331.0" prefWidth="590.0">
+                                    <TableView fx:id="tbOceans" prefHeight="331.0" prefWidth="590.0">
                                       <columns>
-                                        <TableColumn prefWidth="75.0" text="id" />
-                                        <TableColumn prefWidth="129.12181091308594" text="Name" />
-                                          <TableColumn minWidth="0.0" prefWidth="248.56353759765625" text="Description" />
+                                        <TableColumn fx:id="tcOceansId" prefWidth="75.0" text="id" />
+                                        <TableColumn fx:id="tcOceansName" prefWidth="129.12181091308594" text="Name" />
+                                          <TableColumn fx:id="tcOceansDescription" minWidth="0.0" prefWidth="248.56353759765625" text="Description" />
                                       </columns>
                                     </TableView>
                                  </children>

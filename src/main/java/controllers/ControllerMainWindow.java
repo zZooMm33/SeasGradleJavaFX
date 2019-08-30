@@ -6,26 +6,34 @@
 package controllers;
 
 import controllers.menu.ControllerSettingsWindow;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import storage.ConnectionDataBase;
 import storage.CreateTables;
+import storage.Oceans.Oceans;
+import storage.StorageSingleton;
 import utils.PropReader;
 import utils.StaticFields;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.logging.Logger;
 
 public class ControllerMainWindow {
+
+    /**
+     * Список для таблицы Oceans
+     */
+    private final ObservableList<Oceans> dataOceans = FXCollections.observableArrayList();
 
     /**
      * Ссылка на дочернее окно настроек
@@ -80,7 +88,37 @@ public class ControllerMainWindow {
     private MenuItem buttonDeleteOceans; // Value injected by FXMLLoader
 
     @FXML // fx:id="buttonUpdateOceans"
-    private MenuItem buttonUpdateOceans; // Value injected by FXMLLoader
+    private MenuItem buttonUpdateTables; // Value injected by FXMLLoader
+
+    @FXML // fx:id="tbSeas"
+    private TableView<?> tbSeas; // Value injected by FXMLLoader
+
+    @FXML // fx:id="tbOceans"
+    private TableView<Oceans> tbOceans; // Value injected by FXMLLoader
+
+    @FXML // fx:id="tcSeasId"
+    private TableColumn<?, ?> tcSeasId; // Value injected by FXMLLoader
+
+    @FXML // fx:id="tcSeasName"
+    private TableColumn<?, ?> tcSeasName; // Value injected by FXMLLoader
+
+    @FXML // fx:id="tcSeasSquare"
+    private TableColumn<?, ?> tcSeasSquare; // Value injected by FXMLLoader
+
+    @FXML // fx:id="tcSeasMaxDepth"
+    private TableColumn<?, ?> tcSeasMaxDepth; // Value injected by FXMLLoader
+
+    @FXML // fx:id="tcSeasOcean"
+    private TableColumn<?, ?> tcSeasOcean; // Value injected by FXMLLoader
+
+    @FXML // fx:id="tcOceansId"
+    private TableColumn<Oceans, Integer> tcOceansId; // Value injected by FXMLLoader
+
+    @FXML // fx:id="tcOceansName"
+    private TableColumn<Oceans, String> tcOceansName; // Value injected by FXMLLoader
+
+    @FXML // fx:id="tcOceansDescription"
+    private TableColumn<Oceans, String> tcOceansDescription; // Value injected by FXMLLoader
 
     @FXML
     void aboutOnClick(ActionEvent event) {
@@ -182,6 +220,20 @@ public class ControllerMainWindow {
     @FXML
     void buttonAddOceansOnClick(ActionEvent event) {
 
+        Oceans ocean = Oceans.newBuilder()
+                .setName("testName")
+                .setDescription("testDesc")
+                .Build();
+
+        if (StorageSingleton.getSingletonOceans().addOceans(ocean))
+        {
+            dataOceans.clear();
+            dataOceans.addAll(StorageSingleton.getSingletonOceans().getOceans());
+
+            new Alert(Alert.AlertType.INFORMATION, "Океан успешно добавлен.").show();
+        }
+        else
+            new Alert(Alert.AlertType.ERROR, "Ошибка при добавлении океана.").show();
     }
 
     @FXML
@@ -192,18 +244,24 @@ public class ControllerMainWindow {
     @FXML
     void buttonDeleteOceansOnClick(ActionEvent event) {
 
-    }
+        for (Oceans ocean: tbOceans.getSelectionModel().getSelectedItems()){
+            if (StorageSingleton.getSingletonOceans().deleteOceans(ocean.getId())){
+                new Alert(Alert.AlertType.ERROR, "Ошибка при удалении.").show();
+            }
+            else {
+                dataOceans.clear();
+                dataOceans.addAll(StorageSingleton.getSingletonOceans().getOceans());
 
-    @FXML
-    void buttonUpdateOceansOnClick(ActionEvent event) {
-
+                new Alert(Alert.AlertType.INFORMATION, "Океан успешно удален.").show();
+            }
+            break;
+        }
     }
 
     @FXML
     void buttonAddSeasOnClick(ActionEvent event) {
 
     }
-
 
     @FXML
     void buttonChangeSeasOnClick(ActionEvent event) {
@@ -216,8 +274,24 @@ public class ControllerMainWindow {
     }
 
     @FXML
+    void buttonUpdateTablesOnClick(ActionEvent event) {
+        dataOceans.clear();
+        dataOceans.addAll(StorageSingleton.getSingletonOceans().getOceans());
+    }
+
+    @FXML
         // This method is called by the FXMLLoader when initialization is complete
     void initialize() {
+        tcOceansId.setCellValueFactory(cell -> cell.getValue().idProperty().asObject());
+        tcOceansName.setCellValueFactory(cell -> cell.getValue().nameProperty());
+        tcOceansDescription.setCellValueFactory(cell -> cell.getValue().descriptionProperty());
+        tbOceans.setItems(dataOceans);
 
+
+        // Обновляем таблицы
+        if (ConnectionDataBase.getConnection() != null){
+            dataOceans.clear();
+            dataOceans.addAll(StorageSingleton.getSingletonOceans().getOceans());
+        }
     }
 }
