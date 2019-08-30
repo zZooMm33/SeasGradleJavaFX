@@ -40,25 +40,8 @@ public class ControllerMainWindow {
         this.childrenSettingsWindow = childrenSettingsWindow;
     }
 
-    public TextArea getTextAreaInfo() {
-        return textAreaInfo;
-    }
-
-    public void setTextAreaInfo(TextArea textAreaInfo) {
-        this.textAreaInfo = textAreaInfo;
-    }
-
     @FXML // fx:id="anchorPane"
     private AnchorPane anchorPane; // Value injected by FXMLLoader
-
-    @FXML // fx:id="textAreaInfo"
-    private TextArea textAreaInfo; // Value injected by FXMLLoader
-
-    @FXML // fx:id="buttonConnection"
-    private Button buttonConnection; // Value injected by FXMLLoader
-
-    @FXML // fx:id="buttonDisconnect"
-    private Button buttonDisconnect; // Value injected by FXMLLoader
 
     @FXML // fx:id="settings"
     private MenuItem settings; // Value injected by FXMLLoader
@@ -78,30 +61,26 @@ public class ControllerMainWindow {
     @FXML // fx:id="testConnectionDataBase"
     private MenuItem testConnectionDataBase; // Value injected by FXMLLoader
 
-    @FXML
-    void buttonConnectionOnClick(ActionEvent event) {
+    @FXML // fx:id="buttonAddSeas"
+    private MenuItem buttonAddSeas; // Value injected by FXMLLoader
 
-        //textAreaInfo.setText(""); // очистить
+    @FXML // fx:id="buttonChangeSeas"
+    private MenuItem buttonChangeSeas; // Value injected by FXMLLoader
 
-        if (ConnectionDataBase.getConnection() != null) {
-            textAreaInfo.appendText("Успешно подключено к БД\n");
-        } else {
-            textAreaInfo.appendText("Ошибка при подключении к БД\n");
-        }
-    }
+    @FXML // fx:id="buttonDeleteSeas"
+    private MenuItem buttonDeleteSeas; // Value injected by FXMLLoader
 
-    @FXML
-    void buttonDisconnectOnClick(ActionEvent event) {
+    @FXML // fx:id="buttonAddOceans"
+    private MenuItem buttonAddOceans; // Value injected by FXMLLoader
 
-        //textAreaInfo.setText(""); // очистить
+    @FXML // fx:id="buttonChangeOceans"
+    private MenuItem buttonChangeOceans; // Value injected by FXMLLoader
 
-        if (ConnectionDataBase.disconnect()) {
-            textAreaInfo.appendText("Соединение с сервером баз данных разорвано\n");
-        } else {
-            textAreaInfo.appendText("Ошибка.\n Соединение с сервером баз данных не было разорвано\n");
-        }
+    @FXML // fx:id="buttonDeleteOceans"
+    private MenuItem buttonDeleteOceans; // Value injected by FXMLLoader
 
-    }
+    @FXML // fx:id="buttonUpdateOceans"
+    private MenuItem buttonUpdateOceans; // Value injected by FXMLLoader
 
     @FXML
     void aboutOnClick(ActionEvent event) {
@@ -118,7 +97,7 @@ public class ControllerMainWindow {
             windowAbout.show();
 
         } catch (IOException e) {
-            textAreaInfo.appendText("Ошибка при открытии окна About\n");
+            new Alert(Alert.AlertType.ERROR, "Ошибка при открытии окна About").show();
             e.printStackTrace();
         }
     }
@@ -147,7 +126,7 @@ public class ControllerMainWindow {
             getChildrenSettingsWindow().setParent(this);
 
         } catch (IOException e) {
-            textAreaInfo.appendText("Ошибка при открытии окна Properties\n");
+            new Alert(Alert.AlertType.ERROR, "Ошибка при открытии окна Properties").show();
             e.printStackTrace();
         }
     }
@@ -167,7 +146,7 @@ public class ControllerMainWindow {
             windowCreateDataBase.show();
 
         } catch (IOException e) {
-            textAreaInfo.appendText("Ошибка при открытии окна Create DataBase\n");
+            new Alert(Alert.AlertType.ERROR, "Ошибка при открытии окна Create DataBase").show();
             e.printStackTrace();
         }
     }
@@ -198,6 +177,42 @@ public class ControllerMainWindow {
             else
                 new Alert(Alert.AlertType.ERROR, "Ошибка при подключении к БД.").show();
         }
+    }
+
+    @FXML
+    void buttonAddOceansOnClick(ActionEvent event) {
+
+    }
+
+    @FXML
+    void buttonChangeOceansOnClick(ActionEvent event) {
+
+    }
+
+    @FXML
+    void buttonDeleteOceansOnClick(ActionEvent event) {
+
+    }
+
+    @FXML
+    void buttonUpdateOceansOnClick(ActionEvent event) {
+
+    }
+
+    @FXML
+    void buttonAddSeasOnClick(ActionEvent event) {
+
+    }
+
+
+    @FXML
+    void buttonChangeSeasOnClick(ActionEvent event) {
+
+    }
+
+    @FXML
+    void buttonDeleteSeasOnClick(ActionEvent event) {
+
     }
 
     @FXML

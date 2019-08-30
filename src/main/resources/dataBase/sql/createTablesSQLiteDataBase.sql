@@ -8,6 +8,5 @@ CREATE TABLE IF NOT EXISTS Seas (
     Name varchar(255) NOT NULL,
     Square INTEGER NOT NULL,
     MaxDepth INTEGER NOT NULL,
-    IdOcean INTEGER references Oceans(Id),
-    Description varchar(1000)
+    IdOcean INTEGER references Oceans(Id)
 );
