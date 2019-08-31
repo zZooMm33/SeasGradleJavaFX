@@ -6,6 +6,7 @@
 package controllers;
 
 import controllers.menu.ControllerSettingsWindow;
+import controllers.storage.ControllerAddChangeOceanWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,16 +37,11 @@ public class ControllerMainWindow {
     private final ObservableList<Oceans> dataOceans = FXCollections.observableArrayList();
 
     /**
-     * Ссылка на дочернее окно настроек
+     * Нужен для получение всех окенаов из других окон
+     * @return Все океаны
      */
-    private ControllerSettingsWindow childrenSettingsWindow;
-
-    public ControllerSettingsWindow getChildrenSettingsWindow() {
-        return childrenSettingsWindow;
-    }
-
-    public void setChildrenSettingsWindow(ControllerSettingsWindow childrenSettingsWindow) {
-        this.childrenSettingsWindow = childrenSettingsWindow;
+    public ObservableList<Oceans> getDataOceans() {
+        return dataOceans;
     }
 
     @FXML // fx:id="anchorPane"
@@ -160,8 +156,8 @@ public class ControllerMainWindow {
 
             windowSettings.show();
 
-            setChildrenSettingsWindow(loader.getController());
-            getChildrenSettingsWindow().setParent(this);
+            //setChildrenSettingsWindow(loader.getController());
+            //getChildrenSettingsWindow().setParent(this);
 
         } catch (IOException e) {
             new Alert(Alert.AlertType.ERROR, "Ошибка при открытии окна Properties").show();
@@ -219,26 +215,57 @@ public class ControllerMainWindow {
 
     @FXML
     void buttonAddOceansOnClick(ActionEvent event) {
+        try {
+            Stage windowSettings = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/windows/storage/AddChangeOceanWindow.fxml"));
+            Parent rootAbout = loader.load();
+            windowSettings.setTitle(StaticFields.getNameSettingsWindow());
+            Scene sceneAbout = new Scene(rootAbout);
+            windowSettings.setScene(sceneAbout);
+            windowSettings.initModality(Modality.WINDOW_MODAL); // Делаем окно модельным
+            windowSettings.initOwner((Stage) anchorPane.getScene().getWindow());
 
-        Oceans ocean = Oceans.newBuilder()
-                .setName("testName")
-                .setDescription("testDesc")
-                .Build();
+            ControllerAddChangeOceanWindow controllerAddChangeOceanWindow = loader.getController();
+            controllerAddChangeOceanWindow.setControllerMainWindow(this);
 
-        if (StorageSingleton.getSingletonOceans().addOceans(ocean))
-        {
-            dataOceans.clear();
-            dataOceans.addAll(StorageSingleton.getSingletonOceans().getOceans());
+            windowSettings.show();
 
-            new Alert(Alert.AlertType.INFORMATION, "Океан успешно добавлен.").show();
+            //setChildrenSettingsWindow(loader.getController());
+            //getChildrenSettingsWindow().setParent(this);
+
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR, "Ошибка при открытии окна Properties").show();
+            e.printStackTrace();
         }
-        else
-            new Alert(Alert.AlertType.ERROR, "Ошибка при добавлении океана.").show();
     }
 
     @FXML
     void buttonChangeOceansOnClick(ActionEvent event) {
+        try {
+            Stage windowSettings = new Stage();
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/windows/storage/AddChangeOceanWindow.fxml"));
+            Parent rootAbout = loader.load();
+            windowSettings.setTitle(StaticFields.getNameSettingsWindow());
+            Scene sceneAbout = new Scene(rootAbout);
+            windowSettings.setScene(sceneAbout);
+            windowSettings.initModality(Modality.WINDOW_MODAL); // Делаем окно модельным
+            windowSettings.initOwner((Stage) anchorPane.getScene().getWindow());
 
+            windowSettings.show();
+
+            ControllerAddChangeOceanWindow controllerAddChangeOceanWindow = loader.getController();
+            controllerAddChangeOceanWindow.setControllerMainWindow(this);
+            controllerAddChangeOceanWindow.setOceanChange(tbOceans.getSelectionModel().getSelectedItem());
+
+            //setChildrenSettingsWindow(loader.getController());
+            //getChildrenSettingsWindow().setParent(this);
+
+        } catch (IOException e) {
+            new Alert(Alert.AlertType.ERROR, "Ошибка при открытии окна Properties").show();
+            e.printStackTrace();
+        }
     }
 
     @FXML

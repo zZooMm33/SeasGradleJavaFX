@@ -17,19 +17,6 @@ import utils.PropReader;
 
 public class ControllerSettingsWindow {
 
-    /**
-     * Основное окно
-     */
-    private ControllerMainWindow parent;
-
-    public ControllerMainWindow getParent() {
-        return parent;
-    }
-
-    public void setParent(ControllerMainWindow parent) {
-        this.parent = parent;
-    }
-
     @FXML // fx:id="labelHost"
     private Label labelHost; // Value injected by FXMLLoader
 
